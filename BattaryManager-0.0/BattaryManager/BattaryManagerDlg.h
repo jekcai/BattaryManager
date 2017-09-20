@@ -1,5 +1,5 @@
-
-// BattaryManagerDlg.h : Í·ÎÄ¼ş
+ï»¿
+// BattaryManagerDlg.h : å¤´æ–‡ä»¶
 //
 
 #pragma once
@@ -9,13 +9,13 @@ using namespace Gdiplus;
 
 #include "Warning.h"
 
-// CBattaryManagerDlg ¶Ô»°¿ò
+// CBattaryManagerDlg å¯¹è¯æ¡†
 class CBattaryManagerDlg : public CDialog
 {
-// ¹¹Ôì
+// æ„é€ 
 public:
-	CBattaryManagerDlg(CWnd* pParent = NULL);	// ±ê×¼¹¹Ôìº¯Êı
-	~CBattaryManagerDlg(); //Îö¹¹º¯Êı
+	CBattaryManagerDlg(CWnd* pParent = NULL);	// æ ‡å‡†æ„é€ å‡½æ•°
+	~CBattaryManagerDlg(); //ææ„å‡½æ•°
 
 private:
 	void DrawBattary(Graphics& graphics);
@@ -27,37 +27,37 @@ private:
 	void RunBySystemOn();
 	void OutRunOnSystem();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_BATTARYMANAGER_DIALOG };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV æ”¯æŒ
 
 private:
-	SYSTEM_POWER_STATUS lp_pwr_state; //µç³ØĞÅÏ¢
-	bool m_battary_charging_flag; //³äµç±êÊ¶£»
-	int charge_block; //³äµç¿é¸öÊı
+	SYSTEM_POWER_STATUS lp_pwr_state; //ç”µæ± ä¿¡æ¯
+	bool m_battary_charging_flag; //å……ç”µæ ‡è¯†ï¼›
+	int charge_block; //å……ç”µå—ä¸ªæ•°
 
-	bool m_battary_full_flag; //µç³Ø³äÂú±êÊ¶
-	bool m_battary_full_warning_falg; //µç³Ø³äÂú¾¯Ê¾±êÊ¶
-	int m_battary_percent; //µç³ØÈİÁ¿£»
-	int m_energy_blocks; //ÄÜÁ¿Ìõ¸öÊı£»
+	bool m_battary_full_flag; //ç”µæ± å……æ»¡æ ‡è¯†
+	bool m_battary_full_warning_falg; //ç”µæ± å……æ»¡è­¦ç¤ºæ ‡è¯†
+	int m_battary_percent; //ç”µæ± å®¹é‡ï¼›
+	int m_energy_blocks; //èƒ½é‡æ¡ä¸ªæ•°ï¼›
 
 	bool m_move_flag;
 	CPoint m_start_pos;
 
-	CWarning* m_warning; //³äÂúµçÌáÊ¾¶Ô»°¿ò
-	bool m_warning_dlg_create; //ÌáÊ¾¶Ô»°¿ò´´½¨±êÊ¶
-	bool m_warning_dlg_show; //ÌáÊ¾¶Ô»°¿òÏÔÊ¾±êÊ¶
+	CWarning* m_warning; //å……æ»¡ç”µæç¤ºå¯¹è¯æ¡†
+	bool m_warning_dlg_create; //æç¤ºå¯¹è¯æ¡†åˆ›å»ºæ ‡è¯†
+	bool m_warning_dlg_show; //æç¤ºå¯¹è¯æ¡†æ˜¾ç¤ºæ ‡è¯†
 
 
 
-// ÊµÏÖ
+// å®ç°
 protected:
 	HICON m_hIcon;
 	ULONG_PTR m_token;
 
-	// Éú³ÉµÄÏûÏ¢Ó³Éäº¯Êı
+	// ç”Ÿæˆçš„æ¶ˆæ¯æ˜ å°„å‡½æ•°
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();

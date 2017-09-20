@@ -1,25 +1,25 @@
-#pragma once
+ï»¿#pragma once
 #include <gdiplus.h>
 using namespace Gdiplus;
 
 
-// CWarning ¶Ô»°¿ò
+// CWarning å¯¹è¯æ¡†
 
 class CWarning : public CDialogEx
 {
 	DECLARE_DYNAMIC(CWarning)
 
 public:
-	CWarning(CWnd* pParent = NULL);   // ±ê×¼¹¹Ôìº¯Êı
+	CWarning(CWnd* pParent = NULL);   // æ ‡å‡†æ„é€ å‡½æ•°
 	virtual ~CWarning();
 
 private:
-	CRect m_main_crect; //ÉèÖÃÖ÷´°¿Ú
-// ¶Ô»°¿òÊı¾İ
+	CRect m_main_crect; //è®¾ç½®ä¸»çª—å£
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_WARNING_DIALOG };
 
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
 	DECLARE_MESSAGE_MAP()
 public:

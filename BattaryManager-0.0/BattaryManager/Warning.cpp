@@ -1,4 +1,4 @@
-// Warning.cpp : ÊµÏÖÎÄ¼ş
+ï»¿// Warning.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -7,7 +7,7 @@
 #include "afxdialogex.h"
 
 
-// CWarning ¶Ô»°¿ò
+// CWarning å¯¹è¯æ¡†
 
 IMPLEMENT_DYNAMIC(CWarning, CDialogEx)
 
@@ -33,14 +33,14 @@ BEGIN_MESSAGE_MAP(CWarning, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CWarning ÏûÏ¢´¦Àí³ÌĞò
+// CWarning æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 
 BOOL CWarning::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// TODO:  ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯
+	// TODO:  åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–
 	int sc_width = GetSystemMetrics(SM_CXSCREEN);
 	int sc_height = GetSystemMetrics(SM_CYSCREEN);
 
@@ -56,23 +56,23 @@ BOOL CWarning::OnInitDialog()
 	SetActiveWindow();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
-	// Òì³£:  OCX ÊôĞÔÒ³Ó¦·µ»Ø FALSE
+	// å¼‚å¸¸:  OCX å±æ€§é¡µåº”è¿”å› FALSE
 }
 
 
 void CWarning::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
-	// TODO:  ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂë
+	// TODO:  åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
 	Graphics graphics(dc);
 
 	Pen pen(Color(255, 185, 186, 187), 2);
 	graphics.DrawRectangle(&pen, Rect(0, 0, m_main_crect.Width(), m_main_crect.Height()));
 
-	FontFamily font_family(L"»ªÎÄ²ÊÔÆ");
+	FontFamily font_family(L"åæ–‡å½©äº‘");
 	Gdiplus::Font warning_font(&font_family, 32, FontStyleRegular, UnitPoint);
 	SolidBrush text_brush(Color(250, 255, 186, 187));
-	CString strWarning = _T("µç³äÂú£¬Çë°ÎµôµçÔ´£¡");
+	CString strWarning = _T("ç”µå……æ»¡ï¼Œè¯·æ‹”æ‰ç”µæºï¼");
 	graphics.DrawString(strWarning, strWarning.GetLength(), &warning_font, PointF(40, 30), &text_brush);
 
 }
@@ -80,7 +80,7 @@ void CWarning::OnPaint()
 
 BOOL CWarning::OnEraseBkgnd(CDC* pDC)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	SetBackgroundColor(RGB(51, 51, 51));
 
 	//return false;

@@ -1,5 +1,5 @@
-
-// BattaryManagerDlg.cpp : ÊµÏÖÎÄ¼ş
+ï»¿
+// BattaryManagerDlg.cpp : å®ç°æ–‡ä»¶
 //
 
 #include "stdafx.h"
@@ -20,20 +20,20 @@ using namespace std;
 #define BATTARY_CHARGING 2
 #define BATTARY_FULL 3
 
-// ÓÃÓÚÓ¦ÓÃ³ÌĞò¡°¹ØÓÚ¡±²Ëµ¥ÏîµÄ CAboutDlg ¶Ô»°¿ò
+// ç”¨äºåº”ç”¨ç¨‹åºâ€œå…³äºâ€èœå•é¡¹çš„ CAboutDlg å¯¹è¯æ¡†
 
 class CAboutDlg : public CDialog
 {
 public:
 	CAboutDlg();
 
-// ¶Ô»°¿òÊı¾İ
+// å¯¹è¯æ¡†æ•°æ®
 	enum { IDD = IDD_ABOUTBOX };
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
 
-// ÊµÏÖ
+// å®ç°
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -51,7 +51,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 END_MESSAGE_MAP()
 
 
-// CBattaryManagerDlg ¶Ô»°¿ò
+// CBattaryManagerDlg å¯¹è¯æ¡†
 
 
 
@@ -63,25 +63,25 @@ CBattaryManagerDlg::CBattaryManagerDlg(CWnd* pParent /*=NULL*/)
 	GdiplusStartupInput input;
 	GdiplusStartup(&m_token, &input, NULL);
 
-	m_move_flag = false; //³õÊ¼»¯ÒÆ¶¯´°¿Ú±äÁ¿
-	m_battary_charging_flag = false; //³õÊ¼»¯³äµç±êÊ¶
-	charge_block = 1; //³äµç¿é¸öÊı³õÊ¼»¯Îª1
-	m_battary_full_flag = false; //³õÊ¼»¯µçÔ´³äÂú±êÊ¶
-	m_battary_full_warning_falg = false; //³äÂúµç¾¯Ê¾±êÊ¶
+	m_move_flag = false; //åˆå§‹åŒ–ç§»åŠ¨çª—å£å˜é‡
+	m_battary_charging_flag = false; //åˆå§‹åŒ–å……ç”µæ ‡è¯†
+	charge_block = 1; //å……ç”µå—ä¸ªæ•°åˆå§‹åŒ–ä¸º1
+	m_battary_full_flag = false; //åˆå§‹åŒ–ç”µæºå……æ»¡æ ‡è¯†
+	m_battary_full_warning_falg = false; //å……æ»¡ç”µè­¦ç¤ºæ ‡è¯†
 
-	m_battary_percent = 0;//³õÊ¼»¯µç³ØÈİÁ¿
-	m_energy_blocks = 0; //ÄÜÁ¿Ìõ¸öÊı³õÊ¼»¯
+	m_battary_percent = 0;//åˆå§‹åŒ–ç”µæ± å®¹é‡
+	m_energy_blocks = 0; //èƒ½é‡æ¡ä¸ªæ•°åˆå§‹åŒ–
 
-	m_warning = NULL; //³õÊ¼»¯´°¿ÚÖ¸Õë
-	m_warning_dlg_create = false; //³õÊ¼»¯´°¿Ú´´½¨±êÊ¶
-	m_warning_dlg_show = false; //³õÊ¼»¯´°¿ÚÏÔÊ¾±êÊ¶
+	m_warning = NULL; //åˆå§‹åŒ–çª—å£æŒ‡é’ˆ
+	m_warning_dlg_create = false; //åˆå§‹åŒ–çª—å£åˆ›å»ºæ ‡è¯†
+	m_warning_dlg_show = false; //åˆå§‹åŒ–çª—å£æ˜¾ç¤ºæ ‡è¯†
 
-	//RunBySystemOn(); //Ìí¼Ó×¢²á±íÆô¶¯Ïî
+	//RunBySystemOn(); //æ·»åŠ æ³¨å†Œè¡¨å¯åŠ¨é¡¹
 }
 
 CBattaryManagerDlg::~CBattaryManagerDlg()
 {
-	if (m_warning != NULL)  //»ØÊÕ´°¿ÚÖ¸Õë
+	if (m_warning != NULL)  //å›æ”¶çª—å£æŒ‡é’ˆ
 		delete m_warning;
 	m_warning = NULL;
 
@@ -105,15 +105,15 @@ BEGIN_MESSAGE_MAP(CBattaryManagerDlg, CDialog)
 END_MESSAGE_MAP()
 
 
-// CBattaryManagerDlg ÏûÏ¢´¦Àí³ÌĞò
+// CBattaryManagerDlg æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 BOOL CBattaryManagerDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	// ½«¡°¹ØÓÚ...¡±²Ëµ¥ÏîÌí¼Óµ½ÏµÍ³²Ëµ¥ÖĞ¡£
+	// å°†â€œå…³äº...â€èœå•é¡¹æ·»åŠ åˆ°ç³»ç»Ÿèœå•ä¸­ã€‚
 
-	// IDM_ABOUTBOX ±ØĞëÔÚÏµÍ³ÃüÁî·¶Î§ÄÚ¡£
+	// IDM_ABOUTBOX å¿…é¡»åœ¨ç³»ç»Ÿå‘½ä»¤èŒƒå›´å†…ã€‚
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
@@ -131,12 +131,12 @@ BOOL CBattaryManagerDlg::OnInitDialog()
 		}
 	}
 
-	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£  µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
-	//  Ö´ĞĞ´Ë²Ù×÷
-	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
-	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+	// è®¾ç½®æ­¤å¯¹è¯æ¡†çš„å›¾æ ‡ã€‚  å½“åº”ç”¨ç¨‹åºä¸»çª—å£ä¸æ˜¯å¯¹è¯æ¡†æ—¶ï¼Œæ¡†æ¶å°†è‡ªåŠ¨
+	//  æ‰§è¡Œæ­¤æ“ä½œ
+	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
+	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
 
-	// TODO:  ÔÚ´ËÌí¼Ó¶îÍâµÄ³õÊ¼»¯´úÂë
+	// TODO:  åœ¨æ­¤æ·»åŠ é¢å¤–çš„åˆå§‹åŒ–ä»£ç 
 	SetTimer(CLOCK_TIMER, 1000, NULL);
 
 	int sc_width = GetSystemMetrics(SM_CXSCREEN);
@@ -146,12 +146,12 @@ BOOL CBattaryManagerDlg::OnInitDialog()
 	SetWindowPos(NULL, sc_width - main_crect.Width(), 0, main_crect.Width(), main_crect.Height(), SWP_SHOWWINDOW);
 	
 	//::SetWindowLong(m_hWnd, GWL_EXSTYLE, GetWindowLong(m_hWnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-	//::SetLayeredWindowAttributes(m_hWnd, 0, 120, LWA_ALPHA); // 120ÊÇÍ¸Ã÷¶È£¬·¶Î§ÊÇ0¡«255 
+	//::SetLayeredWindowAttributes(m_hWnd, 0, 120, LWA_ALPHA); // 120æ˜¯é€æ˜åº¦ï¼ŒèŒƒå›´æ˜¯0ï½255 
 	SetWindowLong(GetSafeHwnd(), GWL_EXSTYLE, GetWindowLong(GetSafeHwnd(), GWL_EXSTYLE) | WS_EX_LAYERED);
 	SetLayeredWindowAttributes(RGB(0, 0, 0), 255, LWA_COLORKEY);
 	
-	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW); //ÉèÖÃ³ÌĞòÄ£Ê½ÎŞÈÎÎñÀ¸Í¼±ê
-	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
+	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW); //è®¾ç½®ç¨‹åºæ¨¡å¼æ— ä»»åŠ¡æ å›¾æ ‡
+	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
 }
 
 void CBattaryManagerDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -167,19 +167,19 @@ void CBattaryManagerDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 }
 
-// Èç¹ûÏò¶Ô»°¿òÌí¼Ó×îĞ¡»¯°´Å¥£¬ÔòĞèÒªÏÂÃæµÄ´úÂë
-//  À´»æÖÆ¸ÃÍ¼±ê¡£  ¶ÔÓÚÊ¹ÓÃÎÄµµ/ÊÓÍ¼Ä£ĞÍµÄ MFC Ó¦ÓÃ³ÌĞò£¬
-//  Õâ½«ÓÉ¿ò¼Ü×Ô¶¯Íê³É¡£
+// å¦‚æœå‘å¯¹è¯æ¡†æ·»åŠ æœ€å°åŒ–æŒ‰é’®ï¼Œåˆ™éœ€è¦ä¸‹é¢çš„ä»£ç 
+//  æ¥ç»˜åˆ¶è¯¥å›¾æ ‡ã€‚  å¯¹äºä½¿ç”¨æ–‡æ¡£/è§†å›¾æ¨¡å‹çš„ MFC åº”ç”¨ç¨‹åºï¼Œ
+//  è¿™å°†ç”±æ¡†æ¶è‡ªåŠ¨å®Œæˆã€‚
 
 void CBattaryManagerDlg::OnPaint()
 {
 	if (IsIconic())
 	{
-		CPaintDC dc(this); // ÓÃÓÚ»æÖÆµÄÉè±¸ÉÏÏÂÎÄ
+		CPaintDC dc(this); // ç”¨äºç»˜åˆ¶çš„è®¾å¤‡ä¸Šä¸‹æ–‡
 
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
 
-		// Ê¹Í¼±êÔÚ¹¤×÷Çø¾ØĞÎÖĞ¾ÓÖĞ
+		// ä½¿å›¾æ ‡åœ¨å·¥ä½œåŒºçŸ©å½¢ä¸­å±…ä¸­
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
@@ -187,14 +187,14 @@ void CBattaryManagerDlg::OnPaint()
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
 
-		// »æÖÆÍ¼±ê
+		// ç»˜åˆ¶å›¾æ ‡
 		dc.DrawIcon(x, y, m_hIcon);
 	}
 	else
 	{
 		CDialog::OnPaint();
 	}
-	//»ñÈ¡µçÔ´ĞÅÏ¢£º
+	//è·å–ç”µæºä¿¡æ¯ï¼š
 	//SYSTEM_POWER_STATUS lp_pwr_state;
 	//GetSystemPowerStatus(&lp_pwr_state);
 	//
@@ -205,15 +205,15 @@ void CBattaryManagerDlg::OnPaint()
 	//cout << "BatteryLifeTime: " << (int)lp_pwr_state.BatteryLifeTime << endl;
 	//cout << "Reserved1: " << (int)lp_pwr_state.Reserved1 << endl;
 
-	//»ñÈ¡ÏµÍ³Ê±¼ä£º
+	//è·å–ç³»ç»Ÿæ—¶é—´ï¼š
 	//m_system_time = GetCurrentTime();
 	//CString str;
-	//str = m_system_time.Format("%YÄê%mÔÂ%dÈÕ %X");
+	//str = m_system_time.Format("%Yå¹´%mæœˆ%dæ—¥ %X");
 	//USES_CONVERSION;
 	//char* system_time = T2A(str);
 	//cout << system_time << endl;
 
-	//»ñÈ¡µ±µØÊ±¼ä£º
+	//è·å–å½“åœ°æ—¶é—´ï¼š
 	SYSTEMTIME st;
 	CString strDate, strTime;
 	GetLocalTime(&st);
@@ -224,7 +224,7 @@ void CBattaryManagerDlg::OnPaint()
 	char* str_time = T2A(strTime);
 	//cout << str_data << "\t\t" << str_time << endl;
 	
-	//´´½¨Ë«»º´æ£º
+	//åˆ›å»ºåŒç¼“å­˜ï¼š
 	CDC* pDC = GetDC();
 	CDC dcMem;
 	dcMem.CreateCompatibleDC(pDC);
@@ -233,15 +233,15 @@ void CBattaryManagerDlg::OnPaint()
 	CBitmap bmp;
 	bmp.CreateCompatibleBitmap(pDC, main_crect.Width(), main_crect.Height());
 	CBitmap* old_bmp = dcMem.SelectObject(&bmp);
-	//´´½¨GDI+¶ÔÏó£º
+	//åˆ›å»ºGDI+å¯¹è±¡ï¼š
 	Graphics graphics(dcMem);
 	SolidBrush back_brush(Color(0, 0, 0, 0));
-	//»æÖÆ±³¾°£º
+	//ç»˜åˆ¶èƒŒæ™¯ï¼š
 	//Rect main_rect(main_crect.left, main_crect.top, main_crect.Width(), main_crect.Height());
 	//graphics.FillRectangle(&back_brush, main_rect);
 	//CBrush back_brush = CBrush(RGB(51, 51, 51));
 	//dcMem.FillRect(&main_rect, &back_brush);
-	//»æÖÆÔ²»¡£º
+	//ç»˜åˆ¶åœ†å¼§ï¼š
 	
 	//Brush* p_g_brush = &SolidBrush(Color(255, 255, 255, 128));
 	Pen g_pen(Color(128, 255, 255, 0), 5);
@@ -249,18 +249,18 @@ void CBattaryManagerDlg::OnPaint()
 	//graphics.SetSmoothingMode(SmoothingMode::SmoothingModeHighQuality);
 	//graphics.DrawArc(&g_pen, eclips_are, 0, m_angle);
 	//graphics.DrawLine(&g_pen, Point(0, 0), Point(50, 50));
-	//»æÖÆ×ÖÌå£º
+	//ç»˜åˆ¶å­—ä½“ï¼š
 	FontFamily font_family(L"Bauhaus 93");
 	Gdiplus::Font clock_font(&font_family, 32, FontStyleRegular, UnitPoint);
 	//SolidBrush text_brush(Color(250, 101, 194, 0));
 
-	LinearGradientBrush lgBrush2(PointF(0, 0), PointF(40, 40), Color(255, 51, 51, 51), Color(255, 255, 255, 0));//Ğ±Ïò½¥±ä  
-	//ÆÕÍ¨Æ½ÆÌ  
-	lgBrush2.SetWrapMode(WrapModeTile);//Ä¬ÈÏ 
+	LinearGradientBrush lgBrush2(PointF(0, 0), PointF(40, 40), Color(255, 51, 51, 51), Color(255, 255, 255, 0));//æ–œå‘æ¸å˜  
+	//æ™®é€šå¹³é“º  
+	lgBrush2.SetWrapMode(WrapModeTile);//é»˜è®¤ 
 	graphics.DrawString(strDate, strDate.GetLength(), &clock_font, PointF(20, 20), &lgBrush2);
 	graphics.DrawString(strTime, strTime.GetLength(), &clock_font, PointF(20, 60), &lgBrush2);
 
-	//»æÖÆÇúÏß£º
+	//ç»˜åˆ¶æ›²çº¿ï¼š
 	//graphics.DrawBezier(&g_pen, Point(20, 100), Point(m_angle, 100), Point(60, 120), Point(80, m_angle));
 
 	DrawBattary(graphics);
@@ -275,14 +275,14 @@ void CBattaryManagerDlg::DrawBattary(Graphics& graphics)
 	Rect battary_rect(20, 120, 200, 70);
 	DrawRoundRectangle(graphics, battary_bound_pen, battary_rect, 20, 20);
 	
-	for (int i = 0; i < 6; i++) //»æÖÆµçÌõ
+	for (int i = 0; i < 6; i++) //ç»˜åˆ¶ç”µæ¡
 	{
 		graphics.DrawRectangle(&battary_bound_pen, Rect(35 + 30 * i, 130, 20, 50));
 	}
 
 	Rect energy_bar(35, 130, 20, 50);
 
-	if (m_battary_charging_flag == true)//»æÖÆ³äµç×´Ì¬
+	if (m_battary_charging_flag == true)//ç»˜åˆ¶å……ç”µçŠ¶æ€
 	{
 		DrawBattaryCharging(graphics, energy_bar, charge_block);
 	}
@@ -294,12 +294,12 @@ void CBattaryManagerDlg::DrawBattary(Graphics& graphics)
 
 void CBattaryManagerDlg::DrawBattaryCharging(Graphics& graphics,  Rect& rect, int block)
 {
-	for (int i = 0; i < m_energy_blocks; i++) //»æÖÆÒÑÓĞÇø¼äÄÜÁ¿Ìõ
+	for (int i = 0; i < m_energy_blocks; i++) //ç»˜åˆ¶å·²æœ‰åŒºé—´èƒ½é‡æ¡
 	{
 		graphics.FillRectangle(&SolidBrush(Color(255, 0, 205, 0)), Rect(35 + i * 30, 130, 20, 50));
 	}
 
-	for (int i = m_energy_blocks; i < block; i++) //»æÖÆ´ı³äÂúÇø¼äÄÜÁ¿Ìõ
+	for (int i = m_energy_blocks; i < block; i++) //ç»˜åˆ¶å¾…å……æ»¡åŒºé—´èƒ½é‡æ¡
 	{
 		graphics.FillRectangle(&SolidBrush(Color(255, 0, 205, 0)), Rect(35 + i * 30, 130, 20, 50));
 	}
@@ -311,7 +311,7 @@ void CBattaryManagerDlg::DrawBattaryStatues(Graphics& graphics, Rect& rect, int 
 
 	for (int i = 0; i < m_energy_blocks; i++)
 	{
-		if (m_energy_blocks == 1) //¸ù¾İÄÜÁ¿ÌõÊı²»Í¬»æÖÆ²»Í¬µÄÑÕÉ«,×îºóÒ»¸öÉ«¿é¸ù¾İ±ÈÀı»æÉ«
+		if (m_energy_blocks == 1) //æ ¹æ®èƒ½é‡æ¡æ•°ä¸åŒç»˜åˆ¶ä¸åŒçš„é¢œè‰²,æœ€åä¸€ä¸ªè‰²å—æ ¹æ®æ¯”ä¾‹ç»˜è‰²
 		{
 			double contain_rate = m_battary_percent / 17.0;
 			solid_brush.SetColor(Color(255 * contain_rate, 0, 0));
@@ -325,7 +325,7 @@ void CBattaryManagerDlg::DrawBattaryStatues(Graphics& graphics, Rect& rect, int 
 				{
 					contain_rate = (m_battary_percent - 17) / 17.0;
 				}
-				else //m_energy_blocks µÈÓÚ3
+				else //m_energy_blocks ç­‰äº3
 				{
 					contain_rate = (m_battary_percent - 34) / 17.0;
 				}
@@ -345,7 +345,7 @@ void CBattaryManagerDlg::DrawBattaryStatues(Graphics& graphics, Rect& rect, int 
 				{
 					contain_rate = (m_battary_percent - 68) / 17.0;
 				}
-				else //m_energy_blocks µÈÓÚ6
+				else //m_energy_blocks ç­‰äº6
 				{
 					contain_rate = (m_battary_percent - 85) / 17.0;
 				}
@@ -357,7 +357,7 @@ void CBattaryManagerDlg::DrawBattaryStatues(Graphics& graphics, Rect& rect, int 
 }
 
 void CBattaryManagerDlg::GetBlocksNum(int full_percent)
-{ //»ñÈ¡ÄÜÁ¿ÌõÊı
+{ //è·å–èƒ½é‡æ¡æ•°
 	if (full_percent < 17)
 	{
 		m_energy_blocks = 1;
@@ -403,8 +403,8 @@ void CBattaryManagerDlg::DrawRoundRectangle(Graphics& graphics, Pen& bound_pen, 
 	graphics.DrawArc(&bound_pen, Rect(rect.GetRight() - w_round, rect.GetTop(), w_round, h_round), 270, 90);
 }
 
-//µ±ÓÃ»§ÍÏ¶¯×îĞ¡»¯´°¿ÚÊ±ÏµÍ³µ÷ÓÃ´Ëº¯ÊıÈ¡µÃ¹â±ê
-//ÏÔÊ¾¡£
+//å½“ç”¨æˆ·æ‹–åŠ¨æœ€å°åŒ–çª—å£æ—¶ç³»ç»Ÿè°ƒç”¨æ­¤å‡½æ•°å–å¾—å…‰æ ‡
+//æ˜¾ç¤ºã€‚
 HCURSOR CBattaryManagerDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
@@ -414,10 +414,10 @@ HCURSOR CBattaryManagerDlg::OnQueryDragIcon()
 
 void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	if (nIDEvent == CLOCK_TIMER)
 	{
-		//ÅĞ¶Ï´°¿Ú×´Ì¬
+		//åˆ¤æ–­çª—å£çŠ¶æ€
 		/*CRect wnd_pos;
 		GetWindowRect(&wnd_pos);
 		cout << "left: " << wnd_pos.left << "\t\t top: " << wnd_pos.top << endl;
@@ -431,39 +431,39 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 			cout << "\t\t is iconic" << endl;
 		}*/
 		
-		//»ñÈ¡µç³Ø×´Ì¬
+		//è·å–ç”µæ± çŠ¶æ€
 		GetSystemPowerStatus(&lp_pwr_state);
 
-		m_battary_percent = (int)lp_pwr_state.BatteryLifePercent; //»ñÈ¡µç³ØÈİÁ¿
-		GetBlocksNum(m_battary_percent); //»ñÈ¡ÄÜÁ¿Ìõ¸öÊı
+		m_battary_percent = (int)lp_pwr_state.BatteryLifePercent; //è·å–ç”µæ± å®¹é‡
+		GetBlocksNum(m_battary_percent); //è·å–èƒ½é‡æ¡ä¸ªæ•°
 
-		//µçÔ´³äµç×´Ì¬£¬²åÉÏµçÔ´Ïß±êÊ¶Îª1
+		//ç”µæºå……ç”µçŠ¶æ€ï¼Œæ’ä¸Šç”µæºçº¿æ ‡è¯†ä¸º1
 		bool charging_flag = (bool)lp_pwr_state.ACLineStatus;
 
 		if (m_battary_charging_flag == false && charging_flag == true)
-		{ //³äµçÖĞ¶¨Ê±Æ÷
+		{ //å……ç”µä¸­å®šæ—¶å™¨
 			m_battary_charging_flag = true;
 			SetTimer(BATTARY_CHARGING, 1000, NULL);
 		}
 
 		if ((int)lp_pwr_state.BatteryLifePercent == 100)
-		{ //µç³Ø³äÂú×´Ì¬
+		{ //ç”µæ± å……æ»¡çŠ¶æ€
 			m_battary_full_flag = true;
 		}
 		else
-		{ //µç³ØÎ´Âú×´Ì¬
+		{ //ç”µæ± æœªæ»¡çŠ¶æ€
 			m_battary_full_flag = false;
 		}
 
 		if (m_battary_full_flag == true && charging_flag == true && m_battary_full_warning_falg == false) 
-		{ //µ±µç³äÂúÇÒÃ»°ÎµôµçÔ´Ïß ¼°Î´ÉèÖÃ¶¨Ê±Æ÷Ê± ÉèÖÃ¶¨Ê±Æ÷,
+		{ //å½“ç”µå……æ»¡ä¸”æ²¡æ‹”æ‰ç”µæºçº¿ åŠæœªè®¾ç½®å®šæ—¶å™¨æ—¶ è®¾ç½®å®šæ—¶å™¨,
 			cout << "in" << endl;
 			SetTimer(BATTARY_FULL, 1000, NULL);
-			m_battary_full_warning_falg = true; //ÉèÖÃÁË¾¯Ê¾¶¨Ê±Æ÷£»
+			m_battary_full_warning_falg = true; //è®¾ç½®äº†è­¦ç¤ºå®šæ—¶å™¨ï¼›
 		}
 
 		if (m_battary_full_warning_falg == true && charging_flag == false)
-		{ //µ±ÒÑÉèÖÃ¾¯Ê¾¶¨Ê±Æ÷Ê±£¬´ËÊ±°ÎµôÁËµçÔ´Ïß£¬Ó¦¸ÃÈ¡Ïû¾¯Ê¾¶¨Ê±Æ÷
+		{ //å½“å·²è®¾ç½®è­¦ç¤ºå®šæ—¶å™¨æ—¶ï¼Œæ­¤æ—¶æ‹”æ‰äº†ç”µæºçº¿ï¼Œåº”è¯¥å–æ¶ˆè­¦ç¤ºå®šæ—¶å™¨
 			if (m_warning_dlg_create == true)
 			{
 				m_warning->DestroyWindow();
@@ -476,7 +476,7 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 		}
 
 		if (m_battary_full_flag == true || (charging_flag != true && m_battary_charging_flag == true))
-		{ //³äµç½áÊøÈ¡Ïû¶¨Ê±Æ÷,È¡Ïû³äµçÏÔÊ¾
+		{ //å……ç”µç»“æŸå–æ¶ˆå®šæ—¶å™¨,å–æ¶ˆå……ç”µæ˜¾ç¤º
 			KillTimer(BATTARY_CHARGING);
 			m_battary_charging_flag = false;
 		}
@@ -493,7 +493,7 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 	}
 
 	if (nIDEvent == BATTARY_FULL)
-	{ //µç³äÂúºóÌáĞÑ
+	{ //ç”µå……æ»¡åæé†’
 		cout << "im in full" << endl;
 		if (m_warning_dlg_create == false)
 		{
@@ -524,7 +524,7 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 
 BOOL CBattaryManagerDlg::OnEraseBkgnd(CDC* pDC)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	
 	return false;
 	//return CDialog::OnEraseBkgnd(pDC);
@@ -533,7 +533,7 @@ BOOL CBattaryManagerDlg::OnEraseBkgnd(CDC* pDC)
 
 BOOL CBattaryManagerDlg::PreTranslateMessage(MSG* pMsg)
 {
-	// TODO:  ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO:  åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 	
 
 	return CDialog::PreTranslateMessage(pMsg);
@@ -542,7 +542,7 @@ BOOL CBattaryManagerDlg::PreTranslateMessage(MSG* pMsg)
 
 void CBattaryManagerDlg::OnMouseMove(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	if (m_move_flag == true)
 	{
 		CRect main_crect;
@@ -556,10 +556,10 @@ void CBattaryManagerDlg::OnMouseMove(UINT nFlags, CPoint point)
 
 void CBattaryManagerDlg::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	m_move_flag = true;
 	
-	m_start_pos = point; //´°¿ÚÒÆ¶¯Ç°µÄÎ»ÖÃ
+	m_start_pos = point; //çª—å£ç§»åŠ¨å‰çš„ä½ç½®
 
 	CDialog::OnLButtonDown(nFlags, point);
 }
@@ -567,7 +567,7 @@ void CBattaryManagerDlg::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CBattaryManagerDlg::OnLButtonUp(UINT nFlags, CPoint point)
 {
-	// TODO:  ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO:  åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	m_move_flag = false;
 
 	CDialog::OnLButtonUp(nFlags, point);
@@ -576,7 +576,7 @@ void CBattaryManagerDlg::OnLButtonUp(UINT nFlags, CPoint point)
 
 void CBattaryManagerDlg::OnOK()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO:  åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 
 	//CDialog::OnOK();
 }
@@ -584,7 +584,7 @@ void CBattaryManagerDlg::OnOK()
 
 void CBattaryManagerDlg::OnCancel()
 {
-	// TODO:  ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+	// TODO:  åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
 
 	//CDialog::OnCancel();
 }
@@ -592,26 +592,26 @@ void CBattaryManagerDlg::OnCancel()
 void CBattaryManagerDlg::RunBySystemOn()
 {
 	HKEY hKey;
-	//ÕÒµ½ÏµÍ³µÄÆô¶¯Ïî   
+	//æ‰¾åˆ°ç³»ç»Ÿçš„å¯åŠ¨é¡¹   
 	LPCTSTR lpRun = L"Software\\Microsoft\\Windows\\CurrentVersion\\Run";
-	//´ò¿ªÆô¶¯ÏîKey   
+	//æ‰“å¼€å¯åŠ¨é¡¹Key   
 	long lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE, lpRun, 0, KEY_WRITE, &hKey);
 	if (lRet == ERROR_SUCCESS)
 	{
 		TCHAR pFileName[MAX_PATH] = L"C:\\AppSoft\\battarymanager\\BattaryManager.exe";
-		//µÃµ½³ÌĞò×ÔÉíµÄÈ«Â·¾¶   
+		//å¾—åˆ°ç¨‹åºè‡ªèº«çš„å…¨è·¯å¾„   
 		DWORD dwRet = GetModuleFileName(NULL, pFileName, MAX_PATH);
-		//Ìí¼ÓÒ»¸ö×ÓKey,²¢ÉèÖÃÖµ // ÏÂÃæµÄ"BattaryManager"ÊÇÓ¦ÓÃ³ÌĞòÃû×Ö£¨²»¼Óºó×º.exe£©  
+		//æ·»åŠ ä¸€ä¸ªå­Key,å¹¶è®¾ç½®å€¼ // ä¸‹é¢çš„"BattaryManager"æ˜¯åº”ç”¨ç¨‹åºåå­—ï¼ˆä¸åŠ åç¼€.exeï¼‰  
 		lRet = RegSetValueEx(hKey, _T("BattaryManager"), 0, REG_SZ, (BYTE *)pFileName, dwRet);
-		//¹Ø±Õ×¢²á±í   
+		//å…³é—­æ³¨å†Œè¡¨   
 		RegCloseKey(hKey);
 		if (lRet != ERROR_SUCCESS)
 		{
-			AfxMessageBox(L"ÏµÍ³²ÎÊı´íÎó,²»ÄÜÍê³É¿ª»úÆô¶¯ÉèÖÃ");
+			AfxMessageBox(L"ç³»ç»Ÿå‚æ•°é”™è¯¯,ä¸èƒ½å®Œæˆå¼€æœºå¯åŠ¨è®¾ç½®");
 		}
 		else
 		{
-			AfxMessageBox(L"´ò¿ª¿ª»úÆô¶¯³É¹¦");
+			AfxMessageBox(L"æ‰“å¼€å¼€æœºå¯åŠ¨æˆåŠŸ");
 		}
 	}
 }
@@ -619,25 +619,25 @@ void CBattaryManagerDlg::RunBySystemOn()
 void CBattaryManagerDlg::OutRunOnSystem()
 {
 	HKEY hKey;
-	//ÕÒµ½ÏµÍ³µÄÆô¶¯Ïî   
+	//æ‰¾åˆ°ç³»ç»Ÿçš„å¯åŠ¨é¡¹   
 	LPCTSTR lpRun = L"Software\\Microsoft\\Windows\\CurrentVersion\\Run";
-	//´ò¿ªÆô¶¯ÏîKey   
+	//æ‰“å¼€å¯åŠ¨é¡¹Key   
 	long lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE, lpRun, 0, KEY_WRITE, &hKey);
 	if (lRet == ERROR_SUCCESS)
 	{
 		TCHAR pFileName[MAX_PATH] = L"C:\\AppSoft\\battarymanager\\BattaryManager.exe";
-		//µÃµ½³ÌĞò×ÔÉíµÄÈ«Â·¾¶   
+		//å¾—åˆ°ç¨‹åºè‡ªèº«çš„å…¨è·¯å¾„   
 		DWORD dwRet = GetModuleFileName(NULL, pFileName, MAX_PATH);
-		//Ìí¼ÓÒ»¸ö×ÓKey,²¢ÉèÖÃÖµ // ÏÂÃæµÄ"test"ÊÇÓ¦ÓÃ³ÌĞòÃû×Ö£¨²»¼Óºó×º.exe£©  
+		//æ·»åŠ ä¸€ä¸ªå­Key,å¹¶è®¾ç½®å€¼ // ä¸‹é¢çš„"test"æ˜¯åº”ç”¨ç¨‹åºåå­—ï¼ˆä¸åŠ åç¼€.exeï¼‰  
 		lRet = RegDeleteValue(hKey, _T("BattaryManager"));
-		//¹Ø±Õ×¢²á±í   
+		//å…³é—­æ³¨å†Œè¡¨   
 		RegCloseKey(hKey);
 		if (lRet != ERROR_SUCCESS)
 		{
-			AfxMessageBox(L"ÏµÍ³²ÎÊı´íÎó,²»ÄÜÍê³ÉÈ¡Ïû¿ª»úÆô¶¯ÉèÖÃ");
+			AfxMessageBox(L"ç³»ç»Ÿå‚æ•°é”™è¯¯,ä¸èƒ½å®Œæˆå–æ¶ˆå¼€æœºå¯åŠ¨è®¾ç½®");
 		}
 		else{
-			AfxMessageBox(L"¹Ø±Õ¿ª»úÆô¶¯³É¹¦");
+			AfxMessageBox(L"å…³é—­å¼€æœºå¯åŠ¨æˆåŠŸ");
 		}
 	}
 }
