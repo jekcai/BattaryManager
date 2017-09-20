@@ -1,0 +1,29 @@
+﻿生成启动时间为 2017/9/19 18:32:34。
+     1>项目“C:\Users\jek\Desktop\BattaryManager\BattaryManager\BattaryManager.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>ClCompile:
+         C:\Programming\vs2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Release\BattaryManager.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Programming\vs2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\BattaryManager.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BattaryManager.cpp BattaryManagerDlg.cpp Warning.cpp
+         BattaryManager.cpp
+         BattaryManagerDlg.cpp
+     1>BattaryManagerDlg.cpp(317): warning C4244: “参数”: 从“double”转换到“BYTE”，可能丢失数据
+     1>BattaryManagerDlg.cpp(333): warning C4244: “参数”: 从“double”转换到“BYTE”，可能丢失数据
+     1>BattaryManagerDlg.cpp(353): warning C4244: “参数”: 从“double”转换到“BYTE”，可能丢失数据
+     1>BattaryManagerDlg.cpp(441): warning C4800: “BYTE”: 将值强制为布尔值“true”或“false”(性能警告)
+         Warning.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D NDEBUG /D _UNICODE /D UNICODE /D _AFXDLL /l"0x0804" /IRelease\ /nologo /fo"Release\BattaryManager.res" BattaryManager.rc 
+       Link:
+         C:\Programming\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\jek\Desktop\BattaryManager\Release\BattaryManager.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:C:\Programming\vs2013\VC\Include\Manifest\dpiaware.manifest /DEBUG /PDB:"C:\Users\jek\Desktop\BattaryManager\Release\BattaryManager.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\jek\Desktop\BattaryManager\Release\BattaryManager.lib" /MACHINE:X86 /SAFESEH Release\BattaryManager.res
+         Release\BattaryManager.obj
+         Release\BattaryManagerDlg.obj
+         Release\stdafx.obj
+         Release\Warning.obj
+         正在生成代码
+         已完成代码的生成
+         BattaryManager.vcxproj -> C:\Users\jek\Desktop\BattaryManager\Release\BattaryManager.exe
+     1>已完成生成项目“C:\Users\jek\Desktop\BattaryManager\BattaryManager\BattaryManager.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:13.21
