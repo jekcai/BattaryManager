@@ -14,4 +14,8 @@
 * I find the main frame will disappear, after it running for a long time.
 * But the program sill run at background. 
 
+## fixed
+* bug one:
+* because of memory overflow
+
 

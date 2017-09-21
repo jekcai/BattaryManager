@@ -267,6 +267,13 @@ void CBattaryManagerDlg::OnPaint()
 
 	//pDC->SetBkColor(TRANSPARENT);
 	pDC->BitBlt(0, 0, main_crect.Width(), main_crect.Height(), &dcMem, 0, 0, SRCCOPY);
+
+	dcMem.DeleteDC();
+	bmp.DeleteObject();
+	old_bmp->DeleteObject();
+	ReleaseDC(pDC);
+	pDC = NULL;
+	old_bmp = NULL;
 }
 
 void CBattaryManagerDlg::DrawBattary(Graphics& graphics)
@@ -417,20 +424,6 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 	// TODO:  在此添加消息处理程序代码和/或调用默认值
 	if (nIDEvent == CLOCK_TIMER)
 	{
-		//判断窗口状态
-		/*CRect wnd_pos;
-		GetWindowRect(&wnd_pos);
-		cout << "left: " << wnd_pos.left << "\t\t top: " << wnd_pos.top << endl;
-
-		if (IsWindowVisible()== false)
-		{
-			cout << "\t\t unvisible" << endl;
-		}
-		if (IsIconic() == true)
-		{
-			cout << "\t\t is iconic" << endl;
-		}*/
-		
 		//获取电池状态
 		GetSystemPowerStatus(&lp_pwr_state);
 
@@ -457,7 +450,7 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 
 		if (m_battary_full_flag == true && charging_flag == true && m_battary_full_warning_falg == false) 
 		{ //当电充满且没拔掉电源线 及未设置定时器时 设置定时器,
-			cout << "in" << endl;
+			//cout << "in" << endl;
 			SetTimer(BATTARY_FULL, 1000, NULL);
 			m_battary_full_warning_falg = true; //设置了警示定时器；
 		}
@@ -470,7 +463,7 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 				m_warning = NULL;
 				m_warning_dlg_create = false;
 			}
-			cout << "out" << endl;
+			//cout << "out" << endl;
 			KillTimer(BATTARY_FULL);
 			m_battary_full_warning_falg = false;
 		}
@@ -494,10 +487,10 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 
 	if (nIDEvent == BATTARY_FULL)
 	{ //电充满后提醒
-		cout << "im in full" << endl;
+		//cout << "im in full" << endl;
 		if (m_warning_dlg_create == false)
 		{
-			cout << "create" << endl;
+			//cout << "create" << endl;
 			m_warning = new CWarning();
 			m_warning->Create(IDD_WARNING_DIALOG, this);
 			m_warning_dlg_create = true;
@@ -505,13 +498,13 @@ void CBattaryManagerDlg::OnTimer(UINT_PTR nIDEvent)
 		
 		if (m_warning_dlg_create == true && m_warning_dlg_show == false)
 		{
-			cout << "show" << endl;
+			//cout << "show" << endl;
 			m_warning->ShowWindow(SW_SHOW);
 			m_warning_dlg_show = true;
 		}
 		else
 		{
-			cout << "hind" << endl;
+			//cout << "hind" << endl;
 			m_warning->ShowWindow(SW_HIDE);
 			m_warning_dlg_show = false;
 		}
@@ -528,15 +521,6 @@ BOOL CBattaryManagerDlg::OnEraseBkgnd(CDC* pDC)
 	
 	return false;
 	//return CDialog::OnEraseBkgnd(pDC);
-}
-
-
-BOOL CBattaryManagerDlg::PreTranslateMessage(MSG* pMsg)
-{
-	// TODO:  在此添加专用代码和/或调用基类
-	
-
-	return CDialog::PreTranslateMessage(pMsg);
 }
 
 

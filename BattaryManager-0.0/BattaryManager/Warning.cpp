@@ -75,6 +75,7 @@ void CWarning::OnPaint()
 	CString strWarning = _T("电充满，请拔掉电源！");
 	graphics.DrawString(strWarning, strWarning.GetLength(), &warning_font, PointF(40, 30), &text_brush);
 
+	dc.DeleteDC();
 }
 
 
